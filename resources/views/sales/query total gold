@@ -1,0 +1,32 @@
+SELECT cost_per_gram,price_per_gram, 
+SUM(quantity) AS total_quantity, 
+SUM(grams) AS total_grams, 
+cost_per_gram * SUM(grams) AS total_cost, 
+SUM(cost) as Total_cost,
+SUM(price) as Total_Price,
+SUM(price - cost) AS total_grossIncome 
+FROM products 
+WHERE quantity = 1 
+GROUP BY cost_per_gram,price_per_gram;
+
+
+
+
+
+SELECT * FROM products WHERE productname IN ('BNGL 61', 'BNGL 62', 'BNGL 66', 'BNGL 67', 'BNGL 70', 'BNGL 71', 'BNGL 75' , 'BNGL 77', 'BNGL 78', 'BNGL 80', 'BNGL 81', 'BNGL 82', 'BNGL 85', 'BNGL 86' , 'BNGL 87', 'BNGL 88', 'BNGL 89', 'BNGL 91', 'BNGL 92', 'BNGL 93', 'BNGL 96') AND gold_type = '18k';
+
+
+
+
+
+
+UPDATE products SET cost_per_gram = 4450, price_per_gram = 5000 WHERE productname IN ('BNGL 61', 'BNGL 62', 'BNGL 66', 'BNGL 67', 'BNGL 70', 'BNGL 71', 'BNGL 75', 'BNGL 77', 'BNGL 78', 'BNGL 80', 'BNGL 81', 'BNGL 82', 'BNGL 85', 'BNGL 86', 'BNGL 87', 'BNGL 88', 'BNGL 89', 'BNGL 91', 'BNGL 92', 'BNGL 93', 'BNGL 96') AND gold_type = '18k';
+
+
+UPDATE products
+SET cost_per_gram = 4450, 
+    price_per_gram = 5000,
+    cost = 4450 * grams,
+    price = 5000 * grams
+WHERE productname IN ('BNGL 61', 'BNGL 62', 'BNGL 66', 'BNGL 67', 'BNGL 70', 'BNGL 71', 'BNGL 75', 'BNGL 77', 'BNGL 78', 'BNGL 80', 'BNGL 81', 'BNGL 82', 'BNGL 85', 'BNGL 86', 'BNGL 87', 'BNGL 88', 'BNGL 89', 'BNGL 91', 'BNGL 92', 'BNGL 93', 'BNGL 96')
+AND gold_type = '18k';
