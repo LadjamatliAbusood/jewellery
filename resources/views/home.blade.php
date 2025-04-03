@@ -79,13 +79,13 @@
 
                 <!-- Right Side (Payment and Invoice Controls) -->
                 <div class="col-12 col-md-4">
-                    <form>
+                    <form id="checkout-form">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Total" id="UserAccount"
                                 name="UserAccount" value="{{ Auth::user()->name }}" hidden>
 
                             <label for="total" class="form-label">Total</label>
-                          
+
                             <input type="text" class="form-control" placeholder="Total" id="total" name="total"
                                 readonly>
                         </div>
@@ -96,8 +96,8 @@
                         </div>
                         <div class="form-group">
                             <label for="balance" class="form-label">Balance</label>
-                            <input type="text" class="form-control" placeholder="Balance" id="balance" name="balance"
-                                readonly>
+                            <input type="text" class="form-control" placeholder="Balance" id="balance"
+                                name="balance" readonly>
                         </div><br>
                         <div class="card" align="right">
                             <button type="button" id="save" class="btn btn-primary" onclick="addPurchase()">Update
@@ -345,7 +345,11 @@
             }
 
             function addPurchase() {
+
                 console.log("addPurchase called");
+                // Disable the button to prevent double clicks
+                let btn = document.getElementById("save");
+                btn.disabled = true;
 
                 var table_data = [];
                 $('#product_list tbody tr').each(function(row, tr) {
@@ -395,6 +399,8 @@
                                     location.reload(); // Example: Reload the page
                                 }
                             });
+                            // Now, submit the checkout form after the AJAX success
+                            document.getElementById("checkout-form").submit(); // Submit the form
                         }
                     },
                     error: function(xhr, status, error) {
@@ -405,6 +411,7 @@
                             confirmButtonText: 'OK'
                         });
                         console.error("AJAX Error:", error);
+                        btn.disabled = false;
                     }
                 });
             }

@@ -41,7 +41,7 @@
                                 <h5>Cost</h5>
                             </div>
                             <div class="card-body text-center">
-                                <h4 class="card-title">₱ {{ number_format($totalCost, 2) }}</h4>
+                                <h4 class="card-title">₱ {{ number_format($totalCost) }}</h4>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                                 <h5>Sales</h5>
                             </div>
                             <div class="card-body text-center">
-                                <h4 class="card-title">₱ {{ number_format($totalSales, 2) }}</h4>
+                                <h4 class="card-title">₱ {{ number_format($totalSales) }}</h4>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                                 <h5>Gross Income</h5>
                             </div>
                             <div class="card-body text-center">
-                                <h4 class="card-title">₱ {{ number_format($totalProfit, 2) }}</h4>
+                                <h4 class="card-title">₱ {{ number_format($totalProfit) }}</h4>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                                 <h5>Expenses</h5>
                             </div>
                             <div class="card-body text-center">
-                                <h4 class="card-title">₱ {{ number_format($totalExpenses, 2) }}</h4>
+                                <h4 class="card-title">₱ {{ number_format($totalExpenses) }}</h4>
                             </div>
                         </div>
                     </div>
