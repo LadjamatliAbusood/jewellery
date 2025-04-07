@@ -18,7 +18,7 @@
 
                         <div class="form-area" id="productForm">
 
-                            <form method="POST" action="{{ route('product.store') }}">
+                            <form id="addproduct-form" method="POST" action="{{ route('product.store') }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-3">
@@ -42,25 +42,26 @@
                                         <input type="text" class="form-control" name="quantity" readonly value="1">
                                     </div>
                                     <div class="col-md-3">
-                                        <label>Gold Type</label>                              
+                                        <label>Gold Type</label>
                                         <select name="gold_id" id="gold_id" class="form-control">
                                             @foreach ($gold as $item)
-                                                <option value="{{ $item->id }}" 
-                                                    data-gold-cost="{{ $item->gold_cost }}"
-                                                     data-gold-price="{{ $item->gold_price }}">
+                                                <option value="{{ $item->id }}" data-gold-cost="{{ $item->gold_cost }}"
+                                                    data-gold-price="{{ $item->gold_price }}">
                                                     {{ $item->gold_type }}
                                                 </option>
                                             @endforeach
                                         </select>
-                                        
+
                                     </div>
                                     <div class="col-md-3">
                                         <label>Cost Per Grams</label>
-                                        <input type="text" class="form-control" name="cost_per_gram" id="cost_per_gram" readonly>
+                                        <input type="text" class="form-control" name="cost_per_gram" id="cost_per_gram"
+                                            readonly>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Price Per Grams</label>
-                                        <input type="text" class="form-control" name="price_per_gram" id="price_per_gram" readonly>
+                                        <input type="text" class="form-control" name="price_per_gram" id="price_per_gram"
+                                            readonly>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Grams</label>
@@ -76,7 +77,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 mt-3">
-                                            <input type="submit" class="btn btn-primary" value="Add Product">
+                                            <input id="checkout-btn" onclick="submitCheckout()" type="submit"
+                                                class="btn btn-primary" value="Add Product">
                                         </div>
                                     </div>
                                 </div>
@@ -121,15 +123,15 @@
                                                 <td scope="col">{{ ++$key }}</td>
                                                 <td scope="col">{{ $product->productcode }}</td>
                                                 <td scope="col">{{ $product->supplier->supplier_fullname }}</td>
-                                              
+
                                                 <td scope="col">{{ $product->productname }}</td>
                                                 <td scope="col"> {{ $product->gold->gold_type }}</td>
                                                 <td scope="col">{{ $product->quantity }}</td>
-                                                <td scope="col">{{  number_format( $product->cost_per_gram,2) }}</td>
-                                                <td scope="col">{{  number_format($product->price_per_gram, 2) }}</td>
+                                                <td scope="col">{{ number_format($product->cost_per_gram, 2) }}</td>
+                                                <td scope="col">{{ number_format($product->price_per_gram, 2) }}</td>
                                                 <td scope="col">{{ $product->grams }}</td>
-                                                <td scope="col">{{  number_format($product->cost, 2)}}</td>
-                                                <td scope="col">{{ number_format( $product->price,2) }}</td>
+                                                <td scope="col">{{ number_format($product->cost, 2) }}</td>
+                                                <td scope="col">{{ number_format($product->price, 2) }}</td>
                                                 <td scope="col">
                                                     <a href="{{ route('product.edit', $product->id) }}">
                                                         <button class="btn btn-primary btn">
@@ -162,6 +164,17 @@
         @endsection
 
 
+        @push('js')
+            <script>
+                function submitCheckout() {
+                    let btn = document.getElementById('checkout-btn');
+                    btn.disabled = true;
+                    document.getElementById('addproduct-form').submit();
+                }
+            </script>
+        @endpush
+
+
         @push('css')
             <style>
                 .form-area {
@@ -176,5 +189,6 @@
             </style>
         @endpush
 
-            
+
+
         @include('libraries.productscripts')
